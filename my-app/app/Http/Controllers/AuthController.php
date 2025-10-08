@@ -27,7 +27,7 @@ class AuthController extends Controller
         if ($user->isAdmin()) {
             return redirect()->route('admin.dashboard');
         } else {
-            return view('user.user-dashboard');
+            return view('dashboard.user-dashboard');
         }
     }
 

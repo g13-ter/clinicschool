@@ -33,4 +33,10 @@ class LoginController extends Controller
     {
         return view('dashboard');
     }
+
+
+    public function layout()
+    {
+        return view('layouts.app');
+    }
 }

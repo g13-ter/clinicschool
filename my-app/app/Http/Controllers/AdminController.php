@@ -29,7 +29,7 @@ class AdminController extends Controller
                           ->where('is_active', true)
                           ->count();
 
-        return view('admin.admin-dashboard', compact('users', 'totalUsers', 'activeUsers'));
+        return view('dashboard.admin-dashboard', compact('users', 'totalUsers', 'activeUsers'));
     }
 
     /**

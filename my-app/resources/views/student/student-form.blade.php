@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report Form - Benedicto College School Clinic</title>
+    <title>Student Form - Benedicto College School Clinic</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -67,9 +67,9 @@
                     </a>
                 </li>
                 <li class="border-b border-gray-200">
-                    <a href="{{ route('forms.student') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
+                    <a href="{{ route('forms.student') }}" class="flex items-center px-5 py-4 text-white bg-clinic-blue hover:bg-blue-600 transition-all duration-300 font-semibold">
                         <span class="mr-3 text-lg">👥</span>
-                        <span class="font-medium">Students</span>
+                        <span class="font-bold text-lg">Students</span>
                     </a>
                 </li>
                 <li class="border-b border-gray-200">
@@ -91,9 +91,9 @@
                     </a>
                 </li>
                 <li class="border-b border-gray-200">
-                    <a href="{{ route('forms.report') }}" class="flex items-center px-5 py-4 text-white bg-clinic-blue hover:bg-blue-600 transition-all duration-300 font-semibold">
+                    <a href="{{ route('forms.report') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
                         <span class="mr-3 text-lg">📈</span>
-                        <span class="font-bold text-lg">Reports</span>
+                        <span class="font-medium">Reports</span>
                     </a>
                 </li>
                 <li class="border-b border-gray-200">
@@ -102,14 +102,6 @@
                         <span class="font-medium">Settings</span>
                     </a>
                 </li>
-                @if(Auth::user()->isAdmin())
-                <li class="border-b border-gray-200">
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
-                        <span class="mr-3 text-lg">👑</span>
-                        <span class="font-medium">Admin Panel</span>
-                    </a>
-                </li>
-                @endif
             </ul>
         </div>
 
@@ -118,75 +110,43 @@
             <div class="bg-white rounded-xl p-6 shadow-md">
                 <div class="flex items-center justify-between mb-6 pb-4 border-b-2 border-gray-100">
                     <h1 class="text-2xl font-bold text-clinic-dark flex items-center">
-                        <span class="mr-3 text-3xl">📈</span>
-                        Generate Report
+                        <span class="mr-3 text-3xl">👥</span>
+                        Student Information Form
                     </h1>
                 </div>
 
                 <form class="space-y-6">
-                    <!-- Report Type Selection -->
+                    <!-- Personal Information -->
                     <div class="bg-gray-50 p-4 rounded-lg">
                         <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
-                            <span class="mr-2">📋</span>
-                            Report Type
+                            <span class="mr-2">👤</span>
+                            Personal Information
                         </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Select Report Type</label>
-                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent">
-                                    <option value="">Select Report Type</option>
-                                    <option value="student_health">Student Health Summary</option>
-                                    <option value="clinic_visits">Clinic Visits Report</option>
-                                    <option value="medicine_inventory">Medicine Inventory Report</option>
-                                    <option value="staff_performance">Staff Performance Report</option>
-                                    <option value="monthly_summary">Monthly Summary Report</option>
-                                    <option value="emergency_cases">Emergency Cases Report</option>
-                                    <option value="vaccination_records">Vaccination Records</option>
-                                    <option value="illness_trends">Illness Trends Report</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Student ID</label>
+                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" placeholder="Enter Student ID">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Report Format</label>
-                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent">
-                                    <option value="">Select Format</option>
-                                    <option value="pdf">PDF Document</option>
-                                    <option value="excel">Excel Spreadsheet</option>
-                                    <option value="csv">CSV File</option>
-                                    <option value="html">HTML Report</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" placeholder="Enter Full Name">
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Date Range -->
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
-                            <span class="mr-2">📅</span>
-                            Date Range
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">From Date</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth</label>
                                 <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">To Date</label>
-                                <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Gender</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent">
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Filter Options -->
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
-                            <span class="mr-2">🔍</span>
-                            Filter Options
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Grade/Year Level</label>
                                 <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent">
-                                    <option value="">All Grades</option>
+                                    <option value="">Select Grade/Year</option>
                                     <option value="grade1">Grade 1</option>
                                     <option value="grade2">Grade 2</option>
                                     <option value="grade3">Grade 3</option>
@@ -202,85 +162,99 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Gender</label>
-                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent">
-                                    <option value="">All Genders</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Visit Type</label>
-                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent">
-                                    <option value="">All Types</option>
-                                    <option value="routine">Routine Check-up</option>
-                                    <option value="emergency">Emergency</option>
-                                    <option value="injury">Injury</option>
-                                    <option value="illness">Illness</option>
-                                    <option value="vaccination">Vaccination</option>
-                                    <option value="medication">Medication</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Staff Member</label>
-                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent">
-                                    <option value="">All Staff</option>
-                                    <option value="nurse_kj">Nurse KJ</option>
-                                    <option value="nurse_yanna">Nurse Yanna</option>
-                                    <option value="dr_clyden">Dr. Clyden</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Section</label>
+                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" placeholder="Enter Section">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Report Options -->
+                    <!-- Contact Information -->
                     <div class="bg-gray-50 p-4 rounded-lg">
                         <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
-                            <span class="mr-2">⚙️</span>
-                            Report Options
-                        </h3>
-                        <div class="space-y-3">
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-3 rounded">
-                                <span class="text-sm text-gray-700">Include Charts and Graphs</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-3 rounded">
-                                <span class="text-sm text-gray-700">Include Summary Statistics</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-3 rounded">
-                                <span class="text-sm text-gray-700">Include Detailed Records</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-3 rounded">
-                                <span class="text-sm text-gray-700">Include Recommendations</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-3 rounded">
-                                <span class="text-sm text-gray-700">Email Report After Generation</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Email Options (if email is selected) -->
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
-                            <span class="mr-2">📧</span>
-                            Email Options
+                            <span class="mr-2">📞</span>
+                            Contact Information
                         </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Recipient Email</label>
-                                <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" placeholder="Enter recipient email">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" placeholder="Enter Phone Number">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Subject Line</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" placeholder="Enter email subject">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" placeholder="Enter Email Address">
                             </div>
                             <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Additional Message</label>
-                                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" rows="3" placeholder="Enter additional message for the email"></textarea>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Home Address</label>
+                                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" rows="3" placeholder="Enter Complete Home Address"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Contact -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
+                            <span class="mr-2">🚨</span>
+                            Emergency Contact
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Guardian/Parent Name</label>
+                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" placeholder="Enter Guardian/Parent Name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Relationship</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent">
+                                    <option value="">Select Relationship</option>
+                                    <option value="father">Father</option>
+                                    <option value="mother">Mother</option>
+                                    <option value="guardian">Guardian</option>
+                                    <option value="sibling">Sibling</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Emergency Phone</label>
+                                <input type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" placeholder="Enter Emergency Phone">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Emergency Email</label>
+                                <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" placeholder="Enter Emergency Email">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medical Information -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
+                            <span class="mr-2">🏥</span>
+                            Medical Information
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Blood Type</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent">
+                                    <option value="">Select Blood Type</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Allergies</label>
+                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" placeholder="Enter Known Allergies">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Medical Conditions</label>
+                                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" rows="3" placeholder="Enter Any Medical Conditions"></textarea>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Current Medications</label>
+                                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinic-blue focus:border-transparent" rows="3" placeholder="Enter Current Medications"></textarea>
                             </div>
                         </div>
                     </div>
@@ -291,7 +265,7 @@
                             Cancel
                         </button>
                         <button type="submit" class="px-6 py-2 bg-clinic-blue text-white rounded-lg hover:bg-blue-600 transition-colors">
-                            Generate Report
+                            Save Student
                         </button>
                     </div>
                 </form>

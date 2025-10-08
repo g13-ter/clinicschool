@@ -14,3 +14,4 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 // Welcome page after login
 Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
+
