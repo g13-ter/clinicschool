@@ -20,22 +20,22 @@ Route::middleware(['auth'])->group(function () {
     // Form routes
     Route::prefix('forms')->name('forms.')->group(function () {
         Route::get('/student', function () {
-            return view('forms.student-form');
+            return view('student.student-form');
         })->name('student');
         Route::get('/clinic', function () {
-            return view('forms.clinic-form');
+            return view('clinic-visits.clinic-form');
         })->name('clinic');
         Route::get('/medicine', function () {
-            return view('forms.medicine-form');
+            return view('medicine.medicine-form');
         })->name('medicine');
         Route::get('/staff', function () {
-            return view('forms.staff-form');
+            return view('staff.staff-form');
         })->name('staff');
         Route::get('/report', function () {
-            return view('forms.report-form');
+            return view('reports.report-form');
         })->name('report');
         Route::get('/setting', function () {
-            return view('forms.setting-form');
+            return view('settings.setting-form');
         })->name('setting');
     });
 });
