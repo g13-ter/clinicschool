@@ -67,37 +67,37 @@
                     </a>
                 </li>
                 <li class="border-b border-gray-200">
-                    <a href="{{ route('forms.student') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
+                    <a href="{{ route('students.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
                         <span class="mr-3 text-lg">👥</span>
                         <span class="font-medium">Students</span>
                     </a>
                 </li>
                 <li class="border-b border-gray-200">
-                    <a href="{{ route('forms.clinic') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
+                    <a href="{{ route('visits.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
                         <span class="mr-3 text-lg">🏥</span>
                         <span class="font-medium">Clinic Visits</span>
                     </a>
                 </li>
                 <li class="border-b border-gray-200">
-                    <a href="{{ route('forms.medicine') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
+                    <a href="{{ route('medicines.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
                         <span class="mr-3 text-lg">💊</span>
                         <span class="font-medium">Medicine</span>
                     </a>
                 </li>
                 <li class="border-b border-gray-200">
-                    <a href="{{ route('forms.staff') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
+                    <a href="{{ route('staff.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
                         <span class="mr-3 text-lg">👨‍⚕️</span>
                         <span class="font-medium">Staff</span>
                     </a>
                 </li>
                 <li class="border-b border-gray-200">
-                    <a href="{{ route('forms.report') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
+                    <a href="{{ route('reports.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
                         <span class="mr-3 text-lg">📈</span>
                         <span class="font-medium">Reports</span>
                     </a>
                 </li>
                 <li class="border-b border-gray-200">
-                    <a href="{{ route('forms.setting') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
+                    <a href="{{ route('settings.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
                         <span class="mr-3 text-lg">⚙️</span>
                         <span class="font-medium">Settings</span>
                     </a>

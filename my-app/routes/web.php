@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\ClinicVisitController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SettingController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -17,27 +23,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AuthController::class, 'showDashboard'])->name('dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     
-    // Form routes
-    Route::prefix('forms')->name('forms.')->group(function () {
-        Route::get('/student', function () {
-            return view('student.student-form');
-        })->name('student');
-        Route::get('/clinic', function () {
-            return view('clinic-visits.clinic-form');
-        })->name('clinic');
-        Route::get('/medicine', function () {
-            return view('medicine.medicine-form');
-        })->name('medicine');
-        Route::get('/staff', function () {
-            return view('staff.staff-form');
-        })->name('staff');
-        Route::get('/report', function () {
-            return view('reports.report-form');
-        })->name('report');
-        Route::get('/setting', function () {
-            return view('settings.setting-form');
-        })->name('setting');
-    });
+    // Resource routes
+    Route::resource('students', StudentController::class)->only(['index','create','store','edit','update','destroy']);
+    Route::resource('medicines', MedicineController::class)->only(['index','create','store','edit','update','destroy']);
+    Route::resource('visits', ClinicVisitController::class)->only(['index','create','store','edit','update','destroy']);
+    Route::resource('staff', StaffController::class)->only(['index','create','store','edit','update','destroy']);
+    Route::resource('reports', ReportController::class)->only(['index','create','store','edit','update','destroy']);
+    Route::resource('settings', SettingController::class)->only(['index','create','store','edit','update','destroy']);
+
+    // Form routes (legacy)
+    // Keep legacy form routes reachable for now (optional)
 });
 
 // Admin routes
