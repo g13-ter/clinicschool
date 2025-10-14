@@ -73,7 +73,7 @@
                     </a>
                 </li>
                 <li class="border-b border-gray-200">
-                    <a href="{{ route('visits.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
+                    <a href="{{ route('clinic-visits.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
                         <span class="mr-3 text-lg">🏥</span>
                         <span class="font-medium">Clinic Visits</span>
                     </a>

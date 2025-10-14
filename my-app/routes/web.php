@@ -26,7 +26,7 @@ Route::middleware(['auth'])->group(function () {
     // Resource routes
     Route::resource('students', StudentController::class)->only(['index','create','store','edit','update','destroy']);
     Route::resource('medicines', MedicineController::class)->only(['index','create','store','edit','update','destroy']);
-    Route::resource('visits', ClinicVisitController::class)->only(['index','create','store','edit','update','destroy']);
+    Route::resource('clinic-visits', ClinicVisitController::class)->only(['index','create','store','edit','update','destroy']);
     Route::resource('staff', StaffController::class)->only(['index','create','store','edit','update','destroy']);
     Route::resource('reports', ReportController::class)->only(['index','create','store','edit','update','destroy']);
     Route::resource('settings', SettingController::class)->only(['index','create','store','edit','update','destroy']);
