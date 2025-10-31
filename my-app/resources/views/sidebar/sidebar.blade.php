@@ -1,67 +1,47 @@
-<div class="w-64 bg-gray-50 border-r border-gray-200 min-h-screen">
+<!-- Sidebar -->
+<div class="w-64 bg-gray-50 border-r border-gray-200 fixed h-screen overflow-y-auto top-16">
     <ul class="list-none p-0 m-0">
         <li class="border-b border-gray-200">
-            @php $isDashboard = request()->routeIs('dashboard'); @endphp
-            <a href="{{ route('dashboard') }}" class="flex items-center px-5 py-4 transition-all duration-300 font-semibold {{ $isDashboard ? 'text-white bg-clinic-blue hover:bg-blue-600' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }}">
+            <a href="{{ route('dashboard') }}" class="flex items-center px-5 py-4 {{ request()->routeIs('dashboard') ? 'text-white bg-clinic-blue' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }} transition-all duration-300 font-semibold">
                 <span class="mr-3 text-lg">📊</span>
                 <span class="font-bold text-lg">Dashboard</span>
             </a>
         </li>
-        @if (Route::has('students.index'))
         <li class="border-b border-gray-200">
-            @php $isActive = request()->routeIs('students.*'); @endphp
-            <a href="{{ route('students.index') }}" class="flex items-center px-5 py-4 transition-all duration-300 {{ $isActive ? 'bg-gray-100 text-clinic-blue' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }}">
+            <a href="{{ route('students.index') }}" class="flex items-center px-5 py-4 {{ request()->routeIs('students.*') ? 'text-white bg-clinic-blue' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }} transition-all duration-300">
                 <span class="mr-3 text-lg">👥</span>
                 <span class="font-medium">Students</span>
             </a>
         </li>
-        @endif
-        @if (Route::has('visits.index'))
         <li class="border-b border-gray-200">
-            @php $isActive = request()->routeIs('visits.*'); @endphp
-            <a href="{{ route('visits.index') }}" class="flex items-center px-5 py-4 transition-all duration-300 {{ $isActive ? 'bg-gray-100 text-clinic-blue' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }}">
+            <a href="{{ route('clinic-visits.index') }}" class="flex items-center px-5 py-4 {{ request()->routeIs('clinic-visits.*') ? 'text-white bg-clinic-blue' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }} transition-all duration-300">
                 <span class="mr-3 text-lg">🏥</span>
                 <span class="font-medium">Clinic Visits</span>
             </a>
         </li>
-        @endif
-        @if (Route::has('medicines.index'))
         <li class="border-b border-gray-200">
-            @php $isActive = request()->routeIs('medicines.*'); @endphp
-            <a href="{{ route('medicines.index') }}" class="flex items-center px-5 py-4 transition-all duration-300 {{ $isActive ? 'bg-gray-100 text-clinic-blue' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }}">
+            <a href="{{ route('medicines.index') }}" class="flex items-center px-5 py-4 {{ request()->routeIs('medicines.*') ? 'text-white bg-clinic-blue' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }} transition-all duration-300">
                 <span class="mr-3 text-lg">💊</span>
                 <span class="font-medium">Medicine</span>
             </a>
         </li>
-        @endif
-        @if (Route::has('staff.index'))
         <li class="border-b border-gray-200">
-            @php $isActive = request()->routeIs('staff.*'); @endphp
-            <a href="{{ route('staff.index') }}" class="flex items-center px-5 py-4 transition-all duration-300 {{ $isActive ? 'bg-gray-100 text-clinic-blue' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }}">
+            <a href="{{ route('staff.index') }}" class="flex items-center px-5 py-4 {{ request()->routeIs('staff.*') ? 'text-white bg-clinic-blue' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }} transition-all duration-300">
                 <span class="mr-3 text-lg">👨‍⚕️</span>
                 <span class="font-medium">Staff</span>
             </a>
         </li>
-        @endif
-        @if (Route::has('reports.index'))
         <li class="border-b border-gray-200">
-            @php $isActive = request()->routeIs('reports.*'); @endphp
-            <a href="{{ route('reports.index') }}" class="flex items-center px-5 py-4 transition-all duration-300 {{ $isActive ? 'bg-gray-100 text-clinic-blue' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }}">
+            <a href="{{ route('reports.index') }}" class="flex items-center px-5 py-4 {{ request()->routeIs('reports.*') ? 'text-white bg-clinic-blue' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }} transition-all duration-300">
                 <span class="mr-3 text-lg">📈</span>
                 <span class="font-medium">Reports</span>
             </a>
         </li>
-        @endif
-        @if (Route::has('settings.index'))
         <li class="border-b border-gray-200">
-            @php $isActive = request()->routeIs('settings.*'); @endphp
-            <a href="{{ route('settings.index') }}" class="flex items-center px-5 py-4 transition-all duration-300 {{ $isActive ? 'bg-gray-100 text-clinic-blue' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }}">
+            <a href="{{ route('settings.index') }}" class="flex items-center px-5 py-4 {{ request()->routeIs('settings.*') ? 'text-white bg-clinic-blue' : 'text-gray-700 hover:bg-gray-100 hover:text-clinic-blue' }} transition-all duration-300">
                 <span class="mr-3 text-lg">⚙️</span>
                 <span class="font-medium">Settings</span>
             </a>
         </li>
-        @endif
     </ul>
 </div>
-
-

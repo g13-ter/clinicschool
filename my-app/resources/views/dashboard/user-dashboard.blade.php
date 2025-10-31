@@ -1,291 +1,317 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Benedicto College School Clinic</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'clinic-blue': '#3498db',
-                        'clinic-orange': '#f39c12',
-                        'clinic-red': '#e74c3c',
-                        'clinic-green': '#27ae60',
-                        'clinic-purple': '#9b59b6',
-                        'clinic-dark': '#2c3e50',
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-gray-100 font-sans">
-    <!-- Header -->
-    <div class="bg-clinic-dark text-white p-3 shadow-lg flex justify-between items-center fixed top-0 left-0 right-0 z-50">
-        <div class="flex items-center">
-            <div class="w-10 h-10 bg-clinic-blue rounded-full flex items-center justify-center text-white font-bold text-xl mr-3">+</div>
-            <div>
-                <div class="text-xl font-bold">
-                    <span class="text-clinic-blue">B</span>ENEDICTO <span class="text-clinic-orange">C</span>OLLEGE
-                </div>
-                <div class="text-sm font-bold">SCHOOL CLINIC</div>
-                <div class="flex items-center gap-3 mt-1">
-                    <span class="text-xs">Welcome, {{ Auth::user()->name }}!</span>
-                    <form method="POST" action="{{ route('logout') }}" class="inline">
-                @csrf
-                        <button type="submit" class="bg-clinic-red text-white px-2 py-1 rounded text-xs hover:bg-red-600 transition-colors">Logout</button>
-            </form>
-                </div>
-            </div>
+﻿@extends('layouts.app')
+
+@section('content')
+<!-- Top Statistics Cards -->
+<div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+    <!-- Total Students -->
+    <div class="bg-white rounded-xl p-6 shadow-md text-center">
+        <div class="w-16 h-16 mx-auto mb-3 bg-clinic-blue/10 rounded-full flex items-center justify-center">
+            <img src="{{ asset('images/reading-book.png') }}" alt="Students" class="w-8 h-8">
         </div>
-        <div class="flex flex-col items-end gap-2">
-            <div class="relative">
-                <input type="text" placeholder="Search" class="bg-gray-100 border-none px-3 py-1.5 rounded-full w-40 text-gray-800 focus:outline-none focus:bg-white focus:ring-2 focus:ring-clinic-blue text-sm">
-                <div class="absolute right-2 top-1.5 text-gray-500 text-sm">🔍</div>
-            </div>
-            <div class="flex gap-1">
-                <div class="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center cursor-pointer hover:bg-clinic-blue hover:text-white transition-all text-gray-600 text-sm">●</div>
-                <div class="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center cursor-pointer hover:bg-clinic-blue hover:text-white transition-all text-clinic-red text-sm">💊</div>
-                <div class="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center cursor-pointer hover:bg-clinic-blue hover:text-white transition-all text-clinic-purple text-sm">🎧</div>
-                <div class="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center cursor-pointer hover:bg-clinic-blue hover:text-white transition-all text-clinic-orange text-sm">🚑</div>
-                <div class="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center cursor-pointer hover:bg-clinic-blue hover:text-white transition-all text-clinic-green text-sm">📄</div>
+        <div class="text-3xl font-bold text-clinic-dark">590</div>
+        <div class="text-sm text-gray-600">Total Students</div>
+    </div>
+    
+    <!-- Number of Medications -->
+    <div class="bg-white rounded-xl p-6 shadow-md text-center">
+        <div class="w-16 h-16 mx-auto mb-3 bg-clinic-red/10 rounded-full flex items-center justify-center">
+            <img src="{{ asset('images/medicine.png') }}" alt="Medicine" class="w-8 h-8">
+        </div>
+        <div class="text-3xl font-bold text-clinic-dark">30</div>
+        <div class="text-sm text-gray-600">Number of Medications</div>
+    </div>
+    
+    <!-- Clinic Visits -->
+    <div class="bg-white rounded-xl p-6 shadow-md text-center">
+        <div class="w-16 h-16 mx-auto mb-3 bg-clinic-green/10 rounded-full flex items-center justify-center">
+            <img src="{{ asset('images/stethoscope.png') }}" alt="Clinic Visits" class="w-8 h-8">
+        </div>
+        <div class="text-3xl font-bold text-clinic-dark">190</div>
+        <div class="text-sm text-gray-600">Clinic Visits</div>
+    </div>
+    
+    <!-- Emergency Cases -->
+    <div class="bg-white rounded-xl p-6 shadow-md text-center">
+        <div class="w-16 h-16 mx-auto mb-3 bg-clinic-red/10 rounded-full flex items-center justify-center">
+            <img src="{{ asset('images/first-aid-kit.png') }}" alt="Emergency" class="w-8 h-8">
+        </div>
+        <div class="text-3xl font-bold text-clinic-dark">20</div>
+        <div class="text-sm text-gray-600">Emergency Cases</div>
+    </div>
+    
+    <!-- Referral -->
+    <div class="bg-white rounded-xl p-6 shadow-md text-center">
+        <div class="w-16 h-16 mx-auto mb-3 bg-clinic-purple/10 rounded-full flex items-center justify-center">
+            <img src="{{ asset('images/reffer.png') }}" alt="Referral" class="w-8 h-8">
+        </div>
+        <div class="text-3xl font-bold text-clinic-dark">120</div>
+        <div class="text-sm text-gray-600">Referral</div>
+    </div>
+</div>
+
+<!-- Middle Section - 4 Columns Layout exactly like Figma -->
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
+    <!-- Quick Action Panel - Column 1 -->
+    <div class="lg:col-span-1">
+        <div class="bg-clinic-blue/10 rounded-xl p-6 shadow-md h-full">
+            <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
+                <div class="w-6 h-6 bg-clinic-blue rounded-full flex items-center justify-center mr-2">
+                    <i class="fas fa-bolt text-white text-xs"></i>
+                </div>
+                Quick Action
+            </h3>
+            <div class="space-y-3">
+                <a href="{{ route('students.create') }}" class="flex items-center p-3 bg-white rounded-lg hover:bg-clinic-blue/5 hover:border-clinic-blue border border-transparent transition-all duration-200 shadow-sm hover:shadow-md">
+                    <div class="w-10 h-10 bg-gradient-to-r from-clinic-blue to-clinic-blue/80 rounded-full flex items-center justify-center mr-3 shadow-sm">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">Add New Student</div>
+                        <div class="text-xs text-gray-500">Register new student</div>
+                    </div>
+                </a>
+                
+                <a href="#" class="flex items-center p-3 bg-white rounded-lg hover:bg-clinic-green/5 hover:border-clinic-green border border-transparent transition-all duration-200 shadow-sm hover:shadow-md">
+                    <div class="w-10 h-10 bg-gradient-to-r from-clinic-green to-clinic-green/80 rounded-full flex items-center justify-center mr-3 shadow-sm">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">Add New Staff</div>
+                        <div class="text-xs text-gray-500">Add medical staff</div>
+                    </div>
+                </a>
+                
+                <a href="#" class="flex items-center p-3 bg-white rounded-lg hover:bg-clinic-purple/5 hover:border-clinic-purple border border-transparent transition-all duration-200 shadow-sm hover:shadow-md">
+                    <div class="w-10 h-10 bg-gradient-to-r from-clinic-purple to-clinic-purple/80 rounded-full flex items-center justify-center mr-3 shadow-sm">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">Clinic Visits</div>
+                        <div class="text-xs text-gray-500">Record patient visit</div>
+                    </div>
+                </a>
+                
+                <a href="{{ route('medicines.index') }}" class="flex items-center p-3 bg-white rounded-lg hover:bg-clinic-orange/5 hover:border-clinic-orange border border-transparent transition-all duration-200 shadow-sm hover:shadow-md">
+                    <div class="w-10 h-10 bg-gradient-to-r from-clinic-orange to-clinic-orange/80 rounded-full flex items-center justify-center mr-3 shadow-sm">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">Update Medication</div>
+                        <div class="text-xs text-gray-500">Manage medicine inventory</div>
+                    </div>
+                </a>
+                
+                <a href="#" class="flex items-center p-3 bg-white rounded-lg hover:bg-clinic-red/5 hover:border-clinic-red border border-transparent transition-all duration-200 shadow-sm hover:shadow-md">
+                    <div class="w-10 h-10 bg-gradient-to-r from-clinic-red to-clinic-red/80 rounded-full flex items-center justify-center mr-3 shadow-sm">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">Create Referral</div>
+                        <div class="text-xs text-gray-500">Medical referral form</div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
-
-    <div class="flex min-h-screen">
-        <!-- Sidebar -->
-        <div class="w-64 bg-gray-50 border-r border-gray-200 fixed h-screen overflow-y-auto top-20">
-            <ul class="list-none p-0 m-0">
-                <li class="border-b border-gray-200">
-                    <a href="#" class="flex items-center px-5 py-4 text-white bg-clinic-blue hover:bg-blue-600 transition-all duration-300 font-semibold">
-                        <span class="mr-3 text-lg">📊</span>
-                        <span class="font-bold text-lg">Dashboard</span>
-                    </a>
-                </li>
-                <li class="border-b border-gray-200">
-                    <a href="{{ route('students.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
-                        <span class="mr-3 text-lg">👥</span>
-                        <span class="font-medium">Students</span>
-                    </a>
-                </li>
-                <li class="border-b border-gray-200">
-                    <a href="{{ route('clinic-visits.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
-                        <span class="mr-3 text-lg">🏥</span>
-                        <span class="font-medium">Clinic Visits</span>
-                    </a>
-                </li>
-                <li class="border-b border-gray-200">
-                    <a href="{{ route('medicines.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
-                        <span class="mr-3 text-lg">💊</span>
-                        <span class="font-medium">Medicine</span>
-                    </a>
-                </li>
-                <li class="border-b border-gray-200">
-                    <a href="{{ route('staff.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
-                        <span class="mr-3 text-lg">👨‍⚕️</span>
-                        <span class="font-medium">Staff</span>
-                    </a>
-                </li>
-                <li class="border-b border-gray-200">
-                    <a href="{{ route('reports.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
-                        <span class="mr-3 text-lg">📈</span>
-                        <span class="font-medium">Reports</span>
-                    </a>
-                </li>
-                <li class="border-b border-gray-200">
-                    <a href="{{ route('settings.index') }}" class="flex items-center px-5 py-4 text-gray-700 hover:bg-gray-100 hover:text-clinic-blue transition-all duration-300">
-                        <span class="mr-3 text-lg">⚙️</span>
-                        <span class="font-medium">Settings</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Main Content -->
-        <div class="flex-1 ml-64 p-5 mt-20">
-
-            <!-- Metrics Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 mb-8">
-                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-clinic-blue hover:transform hover:-translate-y-1 transition-all">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Students</h3>
-                        <span class="text-2xl">👥</span>
-                    </div>
-                    <div class="text-3xl font-bold text-clinic-dark mb-1">590</div>
-                    <div class="text-sm text-clinic-green font-medium">+12% from last month</div>
+    
+    <!-- Notifications & Alerts - Column 2 -->
+    <div class="lg:col-span-1">
+        <div class="bg-white rounded-xl p-6 shadow-md h-full">
+            <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
+                <div class="w-6 h-6 bg-clinic-orange rounded-full flex items-center justify-center mr-2">
+                    <i class="fas fa-bell text-white text-xs"></i>
                 </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-clinic-red hover:transform hover:-translate-y-1 transition-all">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Medications</h3>
-                        <span class="text-2xl">💊</span>
+                Notifications & Alerts
+            </h3>
+            
+            <div class="space-y-4">
+                <div class="flex items-start p-4 bg-gradient-to-r from-clinic-red/5 to-clinic-red/10 border-l-4 border-clinic-red rounded-lg shadow-sm">
+                    <div class="w-10 h-10 bg-clinic-red rounded-full flex items-center justify-center mr-4 shadow-sm flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                        </svg>
                     </div>
-                    <div class="text-3xl font-bold text-clinic-dark mb-1">30</div>
-                    <div class="text-sm text-clinic-green font-medium">+5 new this week</div>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-clinic-green hover:transform hover:-translate-y-1 transition-all">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Clinic Visits</h3>
-                        <span class="text-2xl">🏥</span>
-                    </div>
-                    <div class="text-3xl font-bold text-clinic-dark mb-1">190</div>
-                    <div class="text-sm text-clinic-green font-medium">+8% from last month</div>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-clinic-orange hover:transform hover:-translate-y-1 transition-all">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Emergency Cases</h3>
-                        <span class="text-2xl">🚨</span>
-                    </div>
-                    <div class="text-3xl font-bold text-clinic-dark mb-1">20</div>
-                    <div class="text-sm text-clinic-red font-medium">-3 from last week</div>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-clinic-purple hover:transform hover:-translate-y-1 transition-all">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Referrals</h3>
-                        <span class="text-2xl">📋</span>
-                    </div>
-                    <div class="text-3xl font-bold text-clinic-dark mb-1">120</div>
-                    <div class="text-sm text-clinic-green font-medium">+15% from last month</div>
-                </div>
-            </div>
-
-            <!-- Content Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                <!-- Quick Actions -->
-                <div class="bg-white rounded-xl p-6 shadow-md">
-                    <div class="flex items-center justify-between mb-5 pb-4 border-b-2 border-gray-100">
-                        <h3 class="text-lg font-bold text-clinic-dark flex items-center">
-                            <span class="mr-2">⚡</span>
-                            Quick Actions
-                        </h3>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <a href="#" class="bg-gradient-to-r from-clinic-blue to-blue-600 text-white p-4 rounded-lg text-center font-semibold hover:transform hover:-translate-y-1 hover:shadow-lg transition-all">Add New Student</a>
-                        <a href="#" class="bg-gradient-to-r from-clinic-blue to-blue-600 text-white p-4 rounded-lg text-center font-semibold hover:transform hover:-translate-y-1 hover:shadow-lg transition-all">Add New Staff</a>
-                        <a href="#" class="bg-gradient-to-r from-clinic-blue to-blue-600 text-white p-4 rounded-lg text-center font-semibold hover:transform hover:-translate-y-1 hover:shadow-lg transition-all">Clinic Visits</a>
-                        <a href="#" class="bg-gradient-to-r from-clinic-blue to-blue-600 text-white p-4 rounded-lg text-center font-semibold hover:transform hover:-translate-y-1 hover:shadow-lg transition-all">Update Medication</a>
-                        <a href="#" class="bg-gradient-to-r from-clinic-blue to-blue-600 text-white p-4 rounded-lg text-center font-semibold hover:transform hover:-translate-y-1 hover:shadow-lg transition-all col-span-2">Create Referral</a>
+                    <div>
+                        <div class="font-semibold text-sm text-clinic-red">Low Stock Alert!</div>
+                        <div class="text-xs text-gray-600">Medicine A - 5 Remaining</div>
+                        <div class="text-xs text-clinic-red font-medium mt-1">Action Required</div>
                     </div>
                 </div>
-
-                <!-- Notifications & Alerts -->
-                <div class="bg-white rounded-xl p-6 shadow-md">
-                    <div class="flex items-center justify-between mb-5 pb-4 border-b-2 border-gray-100">
-                        <h3 class="text-lg font-bold text-clinic-dark flex items-center">
-                            <span class="mr-2">🔔</span>
-                            Notifications & Alerts
-                        </h3>
+                
+                <div class="flex items-start p-4 bg-gradient-to-r from-clinic-blue/5 to-clinic-blue/10 border-l-4 border-clinic-blue rounded-lg shadow-sm">
+                    <div class="w-10 h-10 bg-clinic-blue rounded-full flex items-center justify-center mr-4 shadow-sm flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
                     </div>
-                    <div class="space-y-3">
-                        <div class="flex items-center p-3 bg-yellow-50 border-l-4 border-clinic-orange rounded">
-                            <span class="mr-3 text-lg text-clinic-orange">💊</span>
-                            <div class="text-sm text-yellow-800">Low Stock Alert! Medicine A - 5 Remaining</div>
-                        </div>
-                        <div class="flex items-center p-3 bg-blue-50 border-l-4 border-clinic-blue rounded">
-                            <span class="mr-3 text-lg text-clinic-blue">📅</span>
-                            <div class="text-sm text-blue-800">Upcoming Check-up Medical for Players in Intramurals</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Staff List -->
-            <div class="bg-white rounded-xl p-6 shadow-md mb-8">
-                <div class="flex items-center justify-between mb-5 pb-4 border-b-2 border-gray-100">
-                    <h3 class="text-lg font-bold text-clinic-dark flex items-center">
-                        <span class="mr-2">👥</span>
-                        Staff List
-                    </h3>
-                </div>
-                <div class="space-y-3">
-                    <div class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                        <div class="w-10 h-10 bg-clinic-blue rounded-full flex items-center justify-center text-white font-bold mr-3">KJ</div>
-                        <div>
-                            <div class="font-semibold text-clinic-dark">Nurse KJ</div>
-                            <div class="text-sm text-gray-500">Senior Nurse</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                        <div class="w-10 h-10 bg-clinic-green rounded-full flex items-center justify-center text-white font-bold mr-3">Y</div>
-                        <div>
-                            <div class="font-semibold text-clinic-dark">Nurse Yanna</div>
-                            <div class="text-sm text-gray-500">Staff Nurse</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                        <div class="w-10 h-10 bg-clinic-purple rounded-full flex items-center justify-center text-white font-bold mr-3">C</div>
-                        <div>
-                            <div class="font-semibold text-clinic-dark">Dr. Clyden</div>
-                            <div class="text-sm text-gray-500">School Physician</div>
-                        </div>
-                    </div>
-                </div>
-        </div>
-
-            <!-- Charts -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Common Illnesses Chart -->
-                <div class="bg-white rounded-xl p-6 shadow-md">
-                    <h3 class="text-lg font-bold text-clinic-dark mb-5 text-center">COMMON ILLNESSES RECORD</h3>
-                    <div class="h-48 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
-                        <div class="text-gray-500 text-center">
-                            <div class="text-4xl mb-2">📊</div>
-                            <div>Pie Chart Placeholder</div>
-                        </div>
-                    </div>
-                    <div class="flex justify-center gap-5 mt-4 flex-wrap">
-                        <div class="flex items-center gap-2">
-                            <div class="w-3 h-3 bg-clinic-blue rounded-full"></div>
-                            <span class="text-sm text-gray-600">Fever</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-3 h-3 bg-clinic-red rounded-full"></div>
-                            <span class="text-sm text-gray-600">Headache (70%)</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-3 h-3 bg-clinic-green rounded-full"></div>
-                            <span class="text-sm text-gray-600">Allergies (20%)</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-3 h-3 bg-clinic-orange rounded-full"></div>
-                            <span class="text-sm text-gray-600">Diarrhea (10%)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contagious Illnesses Chart -->
-                <div class="bg-white rounded-xl p-6 shadow-md">
-                    <h3 class="text-lg font-bold text-clinic-dark mb-5 text-center">CONTAGIOUS ILLNESSES RECORD</h3>
-                    <div class="h-48 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
-                        <div class="text-gray-500 text-center">
-                            <div class="text-4xl mb-2">📊</div>
-                            <div>Pie Chart Placeholder</div>
-                        </div>
-                    </div>
-                    <div class="flex justify-center gap-5 mt-4 flex-wrap">
-                        <div class="flex items-center gap-2">
-                            <div class="w-3 h-3 bg-clinic-orange rounded-full"></div>
-                            <span class="text-sm text-gray-600">Flu</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-3 h-3 bg-clinic-green rounded-full"></div>
-                            <span class="text-sm text-gray-600">Chicken Pox</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-3 h-3 bg-clinic-blue rounded-full"></div>
-                            <span class="text-sm text-gray-600">Sore Eyes</span>
-                        </div>
+                    <div>
+                        <div class="font-semibold text-sm text-clinic-blue">Upcoming Check-up</div>
+                        <div class="text-xs text-gray-600">Medical for Players in Intramurals</div>
+                        <div class="text-xs text-clinic-blue font-medium mt-1">Tomorrow 9:00 AM</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
+    
+    <!-- Medical Staff - Column 3 -->
+    <div class="lg:col-span-1">
+        <div class="bg-white rounded-xl p-6 shadow-md h-full">
+            <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
+                <div class="w-6 h-6 bg-clinic-green rounded-full flex items-center justify-center mr-2">
+                    <i class="fas fa-users text-white text-xs"></i>
+                </div>
+                Medical Staff
+            </h3>
+            
+            <div class="space-y-4">
+                <div class="flex items-center p-3 bg-clinic-blue/5 rounded-lg">
+                    <div class="w-12 h-12 bg-clinic-blue rounded-full flex items-center justify-center text-white text-sm font-bold mr-3 shadow-sm">
+                        KJ
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium">Nurse KJ</div>
+                        <div class="text-xs text-gray-500">Head Nurse</div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center p-3 bg-clinic-red/5 rounded-lg">
+                    <div class="w-12 h-12 bg-clinic-red rounded-full flex items-center justify-center text-white text-sm font-bold mr-3 shadow-sm">
+                        YA
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium">Nurse Yanna</div>
+                        <div class="text-xs text-gray-500">Staff Nurse</div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center p-3 bg-clinic-green/5 rounded-lg">
+                    <div class="w-12 h-12 bg-clinic-green rounded-full flex items-center justify-center text-white text-sm font-bold mr-3 shadow-sm">
+                        DC
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium">Dr. Clyden</div>
+                        <div class="text-xs text-gray-500">School Doctor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Monthly Trends - Column 4 -->
+    <div class="lg:col-span-1">
+        <div class="bg-white rounded-xl p-6 shadow-md h-full">
+            <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
+                <div class="w-6 h-6 bg-clinic-purple rounded-full flex items-center justify-center mr-2">
+                    <i class="fas fa-chart-bar text-white text-xs"></i>
+                </div>
+                Monthly Clinic Visits Trend
+            </h3>
+            <div class="h-40 bg-gradient-to-r from-clinic-blue/20 via-clinic-green/20 to-clinic-orange/20 rounded-lg flex items-end justify-around p-4 border border-gray-100">
+                <!-- Enhanced bar chart representation -->
+                <div class="flex flex-col items-center">
+                    <div class="bg-gradient-to-t from-clinic-blue to-clinic-blue/70 rounded-t w-8 h-24 shadow-sm"></div>
+                    <span class="text-xs text-gray-500 mt-2 font-medium">July</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="bg-gradient-to-t from-clinic-green to-clinic-green/70 rounded-t w-8 h-32 shadow-sm"></div>
+                    <span class="text-xs text-gray-500 mt-2 font-medium">Aug</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="bg-gradient-to-t from-clinic-orange to-clinic-orange/70 rounded-t w-8 h-20 shadow-sm"></div>
+                    <span class="text-xs text-gray-500 mt-2 font-medium">Sept</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="bg-gradient-to-t from-clinic-purple to-clinic-purple/70 rounded-t w-8 h-36 shadow-sm"></div>
+                    <span class="text-xs text-gray-500 mt-2 font-medium">Oct</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Common Illnesses Record -->
+    <div class="bg-white rounded-xl p-6 shadow-md">
+        <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
+            <div class="w-6 h-6 bg-clinic-blue rounded-full flex items-center justify-center mr-2">
+                <i class="fas fa-chart-pie text-white text-xs"></i>
+            </div>
+            COMMON ILLNESSES RECORD
+        </h3>
+        <div class="flex items-center justify-between">
+            <div class="w-48 h-48 relative">
+                <!-- Enhanced pie chart representation -->
+                <div class="w-full h-full rounded-full shadow-lg" style="background: conic-gradient(#3498db 0% 35%, #f39c12 35% 60%, #e74c3c 60% 85%, #2ecc71 85% 100%);">
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="bg-white w-20 h-20 rounded-full shadow-inner border-4 border-gray-50"></div>
+                </div>
+            </div>
+            <div class="ml-6 space-y-3">
+                <div class="flex items-center text-sm bg-gray-50 p-2 rounded-lg">
+                    <span class="w-4 h-4 bg-clinic-blue rounded-full mr-3 shadow-sm"></span>
+                    <span class="font-medium">35% Fever</span>
+                </div>
+                <div class="flex items-center text-sm bg-gray-50 p-2 rounded-lg">
+                    <span class="w-4 h-4 bg-clinic-orange rounded-full mr-3 shadow-sm"></span>
+                    <span class="font-medium">25% Headache</span>
+                </div>
+                <div class="flex items-center text-sm bg-gray-50 p-2 rounded-lg">
+                    <span class="w-4 h-4 bg-clinic-red rounded-full mr-3 shadow-sm"></span>
+                    <span class="font-medium">25% Allergies</span>
+                </div>
+                <div class="flex items-center text-sm bg-gray-50 p-2 rounded-lg">
+                    <span class="w-4 h-4 bg-clinic-green rounded-full mr-3 shadow-sm"></span>
+                    <span class="font-medium">15% Diarrhea</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contagious Illnesses Record -->
+    <div class="bg-white rounded-xl p-6 shadow-md">
+        <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
+            <div class="w-6 h-6 bg-clinic-red rounded-full flex items-center justify-center mr-2">
+                <i class="fas fa-virus text-white text-xs"></i>
+            </div>
+            CONTAGIOUS ILLNESSES RECORD
+        </h3>
+        <div class="flex items-center justify-between">
+            <div class="w-48 h-48 relative">
+                <!-- Enhanced pie chart representation -->
+                <div class="w-full h-full rounded-full shadow-lg" style="background: conic-gradient(#f39c12 0% 40%, #2ecc71 40% 70%, #3498db 70% 100%);">
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="bg-white w-20 h-20 rounded-full shadow-inner border-4 border-gray-50"></div>
+                </div>
+            </div>
+            <div class="ml-6 space-y-3">
+                <div class="flex items-center text-sm bg-gray-50 p-2 rounded-lg">
+                    <span class="w-4 h-4 bg-clinic-orange rounded-full mr-3 shadow-sm"></span>
+                    <span class="font-medium">40% Flu</span>
+                </div>
+                <div class="flex items-center text-sm bg-gray-50 p-2 rounded-lg">
+                    <span class="w-4 h-4 bg-clinic-green rounded-full mr-3 shadow-sm"></span>
+                    <span class="font-medium">30% Chicken Pox</span>
+                </div>
+                <div class="flex items-center text-sm bg-gray-50 p-2 rounded-lg">
+                    <span class="w-4 h-4 bg-clinic-blue rounded-full mr-3 shadow-sm"></span>
+                    <span class="font-medium">30% Sore Eyes</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

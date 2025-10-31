@@ -13,26 +13,23 @@ Route::get('/', function () {
     return redirect()->route('login');
 })->name('home');
 
+Route::get('/ping', fn() => 'ok');
+
 // Authentication routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-// Registration disabled - only admins can create accounts
 
 // Protected routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AuthController::class, 'showDashboard'])->name('dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     
-    // Resource routes
     Route::resource('students', StudentController::class)->only(['index','create','store','edit','update','destroy']);
     Route::resource('medicines', MedicineController::class)->only(['index','create','store','edit','update','destroy']);
     Route::resource('clinic-visits', ClinicVisitController::class)->only(['index','create','store','edit','update','destroy']);
     Route::resource('staff', StaffController::class)->only(['index','create','store','edit','update','destroy']);
     Route::resource('reports', ReportController::class)->only(['index','create','store','edit','update','destroy']);
     Route::resource('settings', SettingController::class)->only(['index','create','store','edit','update','destroy']);
-
-    // Form routes (legacy)
-    // Keep legacy form routes reachable for now (optional)
 });
 
 // Admin routes

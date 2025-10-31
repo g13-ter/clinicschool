@@ -6,16 +6,9 @@ use Illuminate\Http\Request;
 
 class MedicineController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $tab = $request->get('tab', 'inventory');
-        
-        // For now, return empty collections to test the view
-        $medicines = collect();
-        $medicineOrders = collect();
-        $visitMedicines = collect();
-
-        return view('medicines.index', compact('medicines', 'medicineOrders', 'visitMedicines', 'tab'));
+        return view('medicines.index');
     }
 
     public function create()
@@ -43,3 +36,5 @@ class MedicineController extends Controller
         return redirect()->route('medicines.index')->with('status', 'Medicine deleted');
     }
 }
+
+
