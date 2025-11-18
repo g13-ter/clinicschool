@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Student;
+use App\Models\Medicine;
+use App\Models\ClinicVisit;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -27,7 +30,57 @@ class AuthController extends Controller
         if ($user->isAdmin()) {
             return redirect()->route('admin.dashboard');
         } else {
-            return view('dashboard.user-dashboard');
+            // Get dynamic statistics with error handling
+            try {
+                $totalStudents = Student::count();
+            } catch (\Exception $e) {
+                $totalStudents = 0;
+            }
+            
+            try {
+                $totalMedicines = Medicine::count();
+            } catch (\Exception $e) {
+                $totalMedicines = 0;
+            }
+            
+            try {
+                $totalClinicVisits = ClinicVisit::count();
+            } catch (\Exception $e) {
+                $totalClinicVisits = 0;
+            }
+            
+            // Count emergency cases - check if complaint or diagnosis contains emergency-related keywords
+            try {
+                $emergencyCases = ClinicVisit::where(function($query) {
+                    $query->where('complaint', 'like', '%emergency%')
+                          ->orWhere('complaint', 'like', '%urgent%')
+                          ->orWhere('complaint', 'like', '%critical%')
+                          ->orWhere('diagnosis', 'like', '%emergency%')
+                          ->orWhere('diagnosis', 'like', '%urgent%')
+                          ->orWhere('diagnosis', 'like', '%critical%');
+                })->count();
+            } catch (\Exception $e) {
+                $emergencyCases = 0;
+            }
+            
+            // Count referrals - check if treatment or notes contains referral-related keywords
+            try {
+                $referrals = ClinicVisit::where(function($query) {
+                    $query->where('treatment', 'like', '%refer%')
+                          ->orWhere('notes', 'like', '%refer%')
+                          ->orWhere('diagnosis', 'like', '%refer%');
+                })->count();
+            } catch (\Exception $e) {
+                $referrals = 0;
+            }
+            
+            return view('dashboard.user-dashboard', compact(
+                'totalStudents',
+                'totalMedicines',
+                'totalClinicVisits',
+                'emergencyCases',
+                'referrals'
+            ));
         }
     }
 
@@ -42,17 +95,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            
-            // Check if user account is active
-            if (!$user->isActive()) {
-                Auth::logout();
-                return back()->withErrors([
-                    'email' => 'Your account has been deactivated. Please contact an administrator.',
-                ])->withInput($request->only('email'));
-            }
-
             $request->session()->regenerate();
-            
             // Redirect based on role automatically
             if ($user->isAdmin()) {
                 return redirect()->intended(route('admin.dashboard'));

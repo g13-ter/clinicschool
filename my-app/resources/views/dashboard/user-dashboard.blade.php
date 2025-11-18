@@ -8,7 +8,7 @@
         <div class="w-16 h-16 mx-auto mb-3 bg-clinic-blue/10 rounded-full flex items-center justify-center">
             <img src="{{ asset('images/reading-book.png') }}" alt="Students" class="w-8 h-8">
         </div>
-        <div class="text-3xl font-bold text-clinic-dark">590</div>
+        <div class="text-3xl font-bold text-clinic-dark">{{ $totalStudents ?? 0 }}</div>
         <div class="text-sm text-gray-600">Total Students</div>
     </div>
     
@@ -17,7 +17,7 @@
         <div class="w-16 h-16 mx-auto mb-3 bg-clinic-red/10 rounded-full flex items-center justify-center">
             <img src="{{ asset('images/medicine.png') }}" alt="Medicine" class="w-8 h-8">
         </div>
-        <div class="text-3xl font-bold text-clinic-dark">30</div>
+        <div class="text-3xl font-bold text-clinic-dark">{{ $totalMedicines ?? 0 }}</div>
         <div class="text-sm text-gray-600">Number of Medications</div>
     </div>
     
@@ -26,7 +26,7 @@
         <div class="w-16 h-16 mx-auto mb-3 bg-clinic-green/10 rounded-full flex items-center justify-center">
             <img src="{{ asset('images/stethoscope.png') }}" alt="Clinic Visits" class="w-8 h-8">
         </div>
-        <div class="text-3xl font-bold text-clinic-dark">190</div>
+        <div class="text-3xl font-bold text-clinic-dark">{{ $totalClinicVisits ?? 0 }}</div>
         <div class="text-sm text-gray-600">Clinic Visits</div>
     </div>
     
@@ -35,7 +35,7 @@
         <div class="w-16 h-16 mx-auto mb-3 bg-clinic-red/10 rounded-full flex items-center justify-center">
             <img src="{{ asset('images/first-aid-kit.png') }}" alt="Emergency" class="w-8 h-8">
         </div>
-        <div class="text-3xl font-bold text-clinic-dark">20</div>
+        <div class="text-3xl font-bold text-clinic-dark">{{ $emergencyCases ?? 0 }}</div>
         <div class="text-sm text-gray-600">Emergency Cases</div>
     </div>
     
@@ -44,13 +44,13 @@
         <div class="w-16 h-16 mx-auto mb-3 bg-clinic-purple/10 rounded-full flex items-center justify-center">
             <img src="{{ asset('images/reffer.png') }}" alt="Referral" class="w-8 h-8">
         </div>
-        <div class="text-3xl font-bold text-clinic-dark">120</div>
+        <div class="text-3xl font-bold text-clinic-dark">{{ $referrals ?? 0 }}</div>
         <div class="text-sm text-gray-600">Referral</div>
     </div>
 </div>
 
-<!-- Middle Section - 4 Columns Layout exactly like Figma -->
-<div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
+<!-- Middle Section - 3 Columns Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
     <!-- Quick Action Panel - Column 1 -->
     <div class="lg:col-span-1">
         <div class="bg-clinic-blue/10 rounded-xl p-6 shadow-md h-full">
@@ -73,19 +73,7 @@
                     </div>
                 </a>
                 
-                <a href="#" class="flex items-center p-3 bg-white rounded-lg hover:bg-clinic-green/5 hover:border-clinic-green border border-transparent transition-all duration-200 shadow-sm hover:shadow-md">
-                    <div class="w-10 h-10 bg-gradient-to-r from-clinic-green to-clinic-green/80 rounded-full flex items-center justify-center mr-3 shadow-sm">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="text-sm font-medium text-gray-800">Add New Staff</div>
-                        <div class="text-xs text-gray-500">Add medical staff</div>
-                    </div>
-                </a>
-                
-                <a href="#" class="flex items-center p-3 bg-white rounded-lg hover:bg-clinic-purple/5 hover:border-clinic-purple border border-transparent transition-all duration-200 shadow-sm hover:shadow-md">
+                <a href="{{ route('clinic-visits.create') }}" class="flex items-center p-3 bg-white rounded-lg hover:bg-clinic-purple/5 hover:border-clinic-purple border border-transparent transition-all duration-200 shadow-sm hover:shadow-md">
                     <div class="w-10 h-10 bg-gradient-to-r from-clinic-purple to-clinic-purple/80 rounded-full flex items-center justify-center mr-3 shadow-sm">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
@@ -164,51 +152,7 @@
         </div>
     </div>
     
-    <!-- Medical Staff - Column 3 -->
-    <div class="lg:col-span-1">
-        <div class="bg-white rounded-xl p-6 shadow-md h-full">
-            <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">
-                <div class="w-6 h-6 bg-clinic-green rounded-full flex items-center justify-center mr-2">
-                    <i class="fas fa-users text-white text-xs"></i>
-                </div>
-                Medical Staff
-            </h3>
-            
-            <div class="space-y-4">
-                <div class="flex items-center p-3 bg-clinic-blue/5 rounded-lg">
-                    <div class="w-12 h-12 bg-clinic-blue rounded-full flex items-center justify-center text-white text-sm font-bold mr-3 shadow-sm">
-                        KJ
-                    </div>
-                    <div>
-                        <div class="text-sm font-medium">Nurse KJ</div>
-                        <div class="text-xs text-gray-500">Head Nurse</div>
-                    </div>
-                </div>
-                
-                <div class="flex items-center p-3 bg-clinic-red/5 rounded-lg">
-                    <div class="w-12 h-12 bg-clinic-red rounded-full flex items-center justify-center text-white text-sm font-bold mr-3 shadow-sm">
-                        YA
-                    </div>
-                    <div>
-                        <div class="text-sm font-medium">Nurse Yanna</div>
-                        <div class="text-xs text-gray-500">Staff Nurse</div>
-                    </div>
-                </div>
-                
-                <div class="flex items-center p-3 bg-clinic-green/5 rounded-lg">
-                    <div class="w-12 h-12 bg-clinic-green rounded-full flex items-center justify-center text-white text-sm font-bold mr-3 shadow-sm">
-                        DC
-                    </div>
-                    <div>
-                        <div class="text-sm font-medium">Dr. Clyden</div>
-                        <div class="text-xs text-gray-500">School Doctor</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Monthly Trends - Column 4 -->
+    <!-- Monthly Trends - Column 3 -->
     <div class="lg:col-span-1">
         <div class="bg-white rounded-xl p-6 shadow-md h-full">
             <h3 class="text-lg font-semibold text-clinic-dark mb-4 flex items-center">

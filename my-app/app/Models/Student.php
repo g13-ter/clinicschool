@@ -12,19 +12,25 @@ class Student extends Model
 
     protected $fillable = [
         'student_id',
+        'student_number',
         'first_name',
         'last_name',
+        'age',
+        'birth_date',
+        'gender',
+        'course',
         'grade_level',
         'section',
-        'date_of_birth',
-        'gender',
-        'medical_notes',
+        'guardian_contact',
         'contact_number',
         'emergency_contact',
+        'medical_notes',
+        'is_active',
     ];
 
     protected $casts = [
-        'date_of_birth' => 'date',
+        'birth_date' => 'date',
+        'is_active' => 'boolean',
     ];
 
     /**

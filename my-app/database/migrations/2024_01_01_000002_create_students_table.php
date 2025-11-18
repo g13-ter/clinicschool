@@ -12,15 +12,19 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('student_id')->unique();
+            $table->string('student_number')->unique();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('grade_level');
-            $table->string('section')->nullable();
-            $table->date('date_of_birth')->nullable();
+            $table->integer('age')->nullable();
+            $table->date('birth_date')->nullable();
             $table->string('gender')->nullable();
-            $table->text('medical_notes')->nullable();
+            $table->string('course')->nullable();
+            $table->string('grade_level')->nullable();
+            $table->string('section')->nullable();
+            $table->string('guardian_contact')->nullable();
             $table->string('contact_number')->nullable();
             $table->string('emergency_contact')->nullable();
+            $table->text('medical_notes')->nullable();
             $table->timestamps();
         });
     }

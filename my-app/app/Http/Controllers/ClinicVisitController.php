@@ -3,47 +3,85 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ClinicVisit;
+use App\Models\Student;
 
 class ClinicVisitController extends Controller
 {
     public function index()
     {
-        // UI-only sample data for preview
-        $visits = [
-            (object)[ 'id' => 1, 'patient_name' => 'Gerson Tero', 'visit_date' => '2025-10-14', 'complaint' => 'Headache' ],
-            (object)[ 'id' => 2, 'patient_name' => 'Aaron Tulod', 'visit_date' => '2025-10-13', 'complaint' => 'Stomach ache' ],
-        ];
+        // Get all clinic visits with student relationship
+        $visits = ClinicVisit::with('student')
+            ->orderBy('visit_date', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('clinic-visits.index', compact('visits'));
     }
 
     public function create()
     {
-        return view('clinic-visits.clinic-form');
+        $students = Student::where('is_active', true)
+            ->orderBy('last_name')
+            ->orderBy('first_name')
+            ->get();
+        
+        return view('clinic-visits.create', compact('students'));
     }
 
     public function store(Request $request)
     {
-        // UI only - no DB
-        return redirect()->route('clinic-visits.index')->with('status', 'Visit saved (UI only)');
+        $validated = $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'visit_date' => 'required|date',
+            'complaint' => 'nullable|string|max:500',
+            'diagnosis' => 'nullable|string|max:500',
+            'treatment' => 'nullable|string|max:500',
+            'notes' => 'nullable|string|max:1000',
+        ]);
+
+        ClinicVisit::create($validated);
+        
+        return redirect()->route('clinic-visits.index')
+                        ->with('status', 'Clinic visit recorded successfully!');
     }
 
     public function edit($id)
     {
-        // sample single visit for edit UI
-        $visit = (object)[ 'id' => $id, 'patient_name' => 'Gerson Tero', 'visit_date' => '2025-10-14', 'complaint' => 'Headache' ];
-        return view('clinic-visits.clinic-form', compact('visit'));
+        $visit = ClinicVisit::findOrFail($id);
+        $students = Student::where('is_active', true)
+            ->orderBy('last_name')
+            ->orderBy('first_name')
+            ->get();
+        
+        return view('clinic-visits.edit', compact('visit', 'students'));
     }
 
     public function update(Request $request, $id)
     {
-        // UI only
-        return redirect()->route('clinic-visits.index')->with('status', 'Visit updated (UI only)');
+        $visit = ClinicVisit::findOrFail($id);
+        
+        $validated = $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'visit_date' => 'required|date',
+            'complaint' => 'nullable|string|max:500',
+            'diagnosis' => 'nullable|string|max:500',
+            'treatment' => 'nullable|string|max:500',
+            'notes' => 'nullable|string|max:1000',
+        ]);
+
+        $visit->update($validated);
+        
+        return redirect()->route('clinic-visits.index')
+                        ->with('status', 'Clinic visit updated successfully!');
     }
 
     public function destroy($id)
     {
-        // UI only
-        return redirect()->route('clinic-visits.index')->with('status', 'Visit deleted (UI only)');
+        $visit = ClinicVisit::findOrFail($id);
+        $visit->delete();
+        
+        return redirect()->route('clinic-visits.index')
+                        ->with('status', 'Clinic visit deleted successfully!');
     }
 }

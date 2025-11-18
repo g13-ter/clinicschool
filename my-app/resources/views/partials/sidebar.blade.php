@@ -19,11 +19,6 @@
             <span class="mr-3">💊</span>Medicine
         </a>
     </li>
-    <li class="{{ request()->routeIs('staff.*') ? 'bg-gray-100 rounded' : '' }}">
-        <a href="{{ route('staff.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-50 rounded">
-            <span class="mr-3">🧑‍⚕️</span>Staff
-        </a>
-    </li>
     <li class="{{ request()->routeIs('reports.*') ? 'bg-gray-100 rounded' : '' }}">
         <a href="{{ route('reports.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-50 rounded">
             <span class="mr-3">📊</span>Reports
